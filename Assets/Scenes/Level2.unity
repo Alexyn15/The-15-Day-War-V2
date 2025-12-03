@@ -22934,6 +22934,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: e69cacc20f61d5a43b0e615a75e49756, type: 3}
     - target: {fileID: 9074852521840521389, guid: 9d6cd1d676464d348bca6fc9b318c608, type: 3}
+      propertyPath: shopGun04Icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 91c2cdc50a9254441a87d44de8453103, type: 3}
+    - target: {fileID: 9074852521840521389, guid: 9d6cd1d676464d348bca6fc9b318c608, type: 3}
+      propertyPath: shopGun05Icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 6daa3f6a352f79145aefc2d43a4c5f9b, type: 3}
+    - target: {fileID: 9074852521840521389, guid: 9d6cd1d676464d348bca6fc9b318c608, type: 3}
+      propertyPath: shopGun06Icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 7b2dcaffa07fceb4d81774f15bc6ebe3, type: 3}
+    - target: {fileID: 9074852521840521389, guid: 9d6cd1d676464d348bca6fc9b318c608, type: 3}
       propertyPath: shopGun01Prefab
       value: 
       objectReference: {fileID: 7014290849049860995, guid: e1abb5f7e8f62224a9b2d835600d5dfa, type: 3}
@@ -22945,6 +22957,18 @@ PrefabInstance:
       propertyPath: shopGun03Prefab
       value: 
       objectReference: {fileID: 643052399730670289, guid: 3ad0d39d503fbcb4eb856b74c559bf66, type: 3}
+    - target: {fileID: 9074852521840521389, guid: 9d6cd1d676464d348bca6fc9b318c608, type: 3}
+      propertyPath: shopGun04Prefab
+      value: 
+      objectReference: {fileID: 5196685580538699452, guid: 8d3a2ef92471b054498b5dba1e29f1fb, type: 3}
+    - target: {fileID: 9074852521840521389, guid: 9d6cd1d676464d348bca6fc9b318c608, type: 3}
+      propertyPath: shopGun05Prefab
+      value: 
+      objectReference: {fileID: 1061641114988079576, guid: acc3cbd0186e6354b894646238cdcdf6, type: 3}
+    - target: {fileID: 9074852521840521389, guid: 9d6cd1d676464d348bca6fc9b318c608, type: 3}
+      propertyPath: shopGun06Prefab
+      value: 
+      objectReference: {fileID: 5324659759019732704, guid: 1fb1a34fbe2cbbb478f5eb80a1a2b3d9, type: 3}
     - target: {fileID: 9074852521840521389, guid: 9d6cd1d676464d348bca6fc9b318c608, type: 3}
       propertyPath: weapons.Array.data[1].icon
       value: 
@@ -27211,6 +27235,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1222226980}
     - target: {fileID: 7115554104734378694, guid: 3f8c679355b66394698ebc1aa51e73e4, type: 3}
+      propertyPath: hotbar
+      value: 
+      objectReference: {fileID: 992638800}
+    - target: {fileID: 7115554104734378694, guid: 3f8c679355b66394698ebc1aa51e73e4, type: 3}
       propertyPath: gunSlot1
       value: 
       objectReference: {fileID: 1532070039}
@@ -27230,6 +27258,18 @@ PrefabInstance:
       propertyPath: shopGun_03
       value: 
       objectReference: {fileID: 643052399730670289, guid: 3ad0d39d503fbcb4eb856b74c559bf66, type: 3}
+    - target: {fileID: 7115554104734378694, guid: 3f8c679355b66394698ebc1aa51e73e4, type: 3}
+      propertyPath: shopGun_04
+      value: 
+      objectReference: {fileID: 6156227712749317325, guid: 64189bf30b8b86347a4d6d946f81fdbb, type: 3}
+    - target: {fileID: 7115554104734378694, guid: 3f8c679355b66394698ebc1aa51e73e4, type: 3}
+      propertyPath: shopGun_05
+      value: 
+      objectReference: {fileID: 1061641114988079576, guid: acc3cbd0186e6354b894646238cdcdf6, type: 3}
+    - target: {fileID: 7115554104734378694, guid: 3f8c679355b66394698ebc1aa51e73e4, type: 3}
+      propertyPath: shopGun_06
+      value: 
+      objectReference: {fileID: 5324659759019732704, guid: 1fb1a34fbe2cbbb478f5eb80a1a2b3d9, type: 3}
     - target: {fileID: 7467444075545967275, guid: 3f8c679355b66394698ebc1aa51e73e4, type: 3}
       propertyPath: m_SortingOrder
       value: 1200

@@ -12,66 +12,72 @@ public class WeaponController : MonoBehaviour
     public GameObject shopGun_01; // Item 1
     public GameObject shopGun_02; // Item 2
     public GameObject shopGun_03; // Item 3
+    public GameObject shopGun_04; // Item 4
+    public GameObject shopGun_05; // Item 5
+    public GameObject shopGun_06; // Item 6
+
+    [Header("Hotbar Reference")]  // Assign Hotbar GameObject ở đây!
+    public WeaponHotbar hotbar;
 
     private GameObject currentWeapon;
     private SpriteRenderer playerSprite;
     private Gun currentGun;
 
-    // PlayerPrefs keys
+    // PlayerPrefs keys (giữ nguyên nếu cần)
     private string shopGun01Key = "Item_01_Bought";
     private string shopGun02Key = "Item_02_Bought";
     private string shopGun03Key = "Item_03_Bought";
+    private string shopGun04Key = "Item_04_Bought";
+    private string shopGun05Key = "Item_05_Bought";
+    private string shopGun06Key = "Item_06_Bought";
 
     void Start()
     {
         playerSprite = GetComponent<SpriteRenderer>();
 
-        // Kiểm tra PlayerPrefs
-        bool hasShopGun01 = PlayerPrefs.GetInt(shopGun01Key, 0) == 1;
-        bool hasShopGun02 = PlayerPrefs.GetInt(shopGun02Key, 0) == 1;
-        bool hasShopGun03 = PlayerPrefs.GetInt(shopGun03Key, 0) == 1;
-
-        // Trang bị ưu tiên: Item 3 > Item 2 > Item 1 > gunSlot1
-        if (hasShopGun03 && shopGun_03 != null)
+        // Subscribe event từ Hotbar để equip khi select
+        if (hotbar != null)
         {
-            EquipWeapon(shopGun_03);
-        }
-        else if (hasShopGun02 && shopGun_02 != null)
-        {
-            EquipWeapon(shopGun_02);
-        }
-        else if (hasShopGun01 && shopGun_01 != null)
-        {
-            EquipWeapon(shopGun_01);
+            hotbar.OnSelectionChanged += OnHotbarWeaponSelected;
+            Debug.Log("[WeaponController] Subscribed to Hotbar event");
         }
         else
         {
-            EquipWeapon(gunSlot1);
+            Debug.LogError("[WeaponController] Hotbar reference NULL! Assign in Inspector.");
+        }
+
+        // Bỏ initial equip ở đây, để Hotbar handle (nó sẽ trigger SelectSlot ở Start())
+    }
+
+    private void OnHotbarWeaponSelected(WeaponSlotData data)
+    {
+        GameObject prefabToEquip = data.prefab;
+
+        // Fallback default nếu chưa mua (dựa trên slot)
+        if (prefabToEquip == null)
+        {
+            switch (hotbar.activeIndex)
+            {
+                case 1:  // Slot 1 dùng default2
+                    prefabToEquip = gunSlot2;
+                    break;
+                default:  // Các slot khác dùng default1
+                    prefabToEquip = gunSlot1;
+                    break;
+            }
+        }
+
+        if (prefabToEquip != null)
+        {
+            EquipWeapon(prefabToEquip);
+            Debug.Log($"[WeaponController] Equipped: {prefabToEquip.name} for slot {hotbar.activeIndex}");
         }
     }
 
     void Update()
     {
-        // Input trang bị
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            bool hasGun1 = PlayerPrefs.GetInt(shopGun01Key, 0) == 1;
-            EquipWeapon(hasGun1 && shopGun_01 != null ? shopGun_01 : gunSlot1);
-        }
+        // KHÔNG xử lý input phím nữa! Hotbar handle hết.
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            bool hasGun2 = PlayerPrefs.GetInt(shopGun02Key, 0) == 1;
-            EquipWeapon(hasGun2 && shopGun_02 != null ? shopGun_02 : gunSlot2);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            bool hasGun3 = PlayerPrefs.GetInt(shopGun03Key, 0) == 1;
-            EquipWeapon(hasGun3 && shopGun_03 != null ? shopGun_03 : gunSlot1);
-        }
-
-        // Điều khiển hướng súng
         if (currentWeapon == null) return;
 
         var weaponSprite = currentWeapon.GetComponent<SpriteRenderer>();
@@ -86,22 +92,17 @@ public class WeaponController : MonoBehaviour
 
     public void EquipWeapon(GameObject weaponPrefab)
     {
-        if (weaponPrefab == null)
-        {
-            Debug.LogError("[EquipWeapon] weaponPrefab NULL!");
-            return;
-        }
-
-        if (weaponHolder == null)
-        {
-            Debug.LogError("[EquipWeapon] weaponHolder NULL!");
-            return;
-        }
-
         if (currentWeapon != null)
             Destroy(currentWeapon);
 
         currentWeapon = Instantiate(weaponPrefab, weaponHolder.position, weaponHolder.rotation, weaponHolder);
         currentGun = currentWeapon.GetComponent<Gun>();
+    }
+
+    // Cleanup event
+    private void OnDestroy()
+    {
+        if (hotbar != null)
+            hotbar.OnSelectionChanged -= OnHotbarWeaponSelected;
     }
 }
